@@ -1,3 +1,5 @@
+package com.example;
+
 public class CourierCredentials {
 
     public final String login;

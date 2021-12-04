@@ -1,3 +1,5 @@
+package com.example;
+
 import static io.restassured.RestAssured.given;
 
 public class CourierClient extends RestAssuredClient {

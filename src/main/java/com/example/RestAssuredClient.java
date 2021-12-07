@@ -5,7 +5,10 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import static io.restassured.RestAssured.given;
+
 public class RestAssuredClient {
+
     public RequestSpecification getBaseSpec() {
         return new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
@@ -13,12 +16,47 @@ public class RestAssuredClient {
                 .build();
     }
 
+    public static Response getResponse(
+            RequestSpecification specification,
+            ResponseType responseType,
+            String requestPath,
+            Object requestBody) {
+        RequestSpecification requestSpecification;
+        if (requestBody != null) {
+            requestSpecification = given().spec(specification).body(requestBody).when();
+        } else {
+            requestSpecification = given().spec(specification).when();
+        }
+        Response returnedResponse;
+        switch (responseType) {
+            case GET:
+                returnedResponse = requestSpecification.get(requestPath);
+                break;
+            case POST:
+                returnedResponse = requestSpecification.post(requestPath);
+                break;
+            case PUT:
+                returnedResponse = requestSpecification.put(requestPath);
+                break;
+            case PATCH:
+                returnedResponse = requestSpecification.patch(requestPath);
+                break;
+            case DELETE:
+                returnedResponse =  requestSpecification.delete(requestPath);
+                break;
+            default:
+                throw new IllegalArgumentException("Trying to calls unsupported request type");
+        }
+        return returnedResponse;
+    }
+
+
+
     public static int getResponseCode(Response response) {
         return response.then().extract().statusCode();
     }
 
     public static <T> T getResponseBodyFieldByPath(Response response, String fieldPath) {
         return response.then().extract().path(fieldPath);
-
     }
 }

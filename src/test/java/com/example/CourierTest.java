@@ -34,15 +34,15 @@ public class CourierTest {
     @After
     public void tearDown() {
         if (courier.login != null && courier.password != null) {
-            int courierId = courierClient.login(CourierCredentials.from(courier));
-            courierClient.delete(courierId);
+            int courierId = courierClient.loginCourier(CourierCredentials.from(courier));
+            courierClient.deleteCourier(courierId);
         }
     }
 
     @Test
     public void courierCanBeCreatedWithCredentials() {
         courier = Courier.getRandom();
-        Response courierCreatedResponse = courierClient.createResponse(courier);
+        Response courierCreatedResponse = courierClient.createCourierResponse(courier);
         int responseCode = CourierClient.getResponseCode(courierCreatedResponse);
         boolean responseBody = CourierClient.getResponseBodyFieldByPath(courierCreatedResponse, "ok");
         assertThat("Courier not created",
@@ -52,7 +52,7 @@ public class CourierTest {
     @Test
     public void courierCanBeCreatedWithRequiredFields() {
         courier = Courier.getCourierWithOnlyRequiredFields();
-        Response courierCreatedResponse = courierClient.createResponse(courier);
+        Response courierCreatedResponse = courierClient.createCourierResponse(courier);
         int responseCode = CourierClient.getResponseCode(courierCreatedResponse);
         boolean responseBody = CourierClient.getResponseBodyFieldByPath(courierCreatedResponse, "ok");
         assertThat("Courier not created",
@@ -63,11 +63,11 @@ public class CourierTest {
     public void cantBeCreatedTwoIdenticalCouriers() {
         courier = Courier.getRandom();
         // Create first courier
-        Response firstCreatedCourierResponse = courierClient.createResponse(courier);
+        Response firstCreatedCourierResponse = courierClient.createCourierResponse(courier);
         int firstCourierResponseCode = CourierClient.getResponseCode(firstCreatedCourierResponse);
         boolean firstResponseBody= CourierClient.getResponseBodyFieldByPath(firstCreatedCourierResponse, "ok");
         // Create second courier
-        Response secondCourierCreatedResponse = courierClient.createResponse(courier);
+        Response secondCourierCreatedResponse = courierClient.createCourierResponse(courier);
         int secondCourierResponseCode = CourierClient.getResponseCode(secondCourierCreatedResponse);
         String secondResponseBody = CourierClient.getResponseBodyFieldByPath(secondCourierCreatedResponse, "message");
 
@@ -83,7 +83,7 @@ public class CourierTest {
     @Test
     public void courierCantBeCreatedWithoutCredentials() {
         courier = Courier.getCourierWithEmptyCredentials();
-        Response courierResponse = courierClient.createResponse(courier);
+        Response courierResponse = courierClient.createCourierResponse(courier);
         int responseCode = CourierClient.getResponseCode(courierResponse);
         String responseBody = CourierClient.getResponseBodyFieldByPath(courierResponse, "message");
         assertThat("Courier without credentials was created", 400, is(responseCode));
@@ -97,11 +97,11 @@ public class CourierTest {
         courier = Courier.getRandom();
         Courier secondCourier = Courier.getCourierWithExactLogin(courier.login);
         // Create first courier
-        Response firstCreatedCourierResponse = courierClient.createResponse(courier);
+        Response firstCreatedCourierResponse = courierClient.createCourierResponse(courier);
         int firstCourierResponseCode = CourierClient.getResponseCode(firstCreatedCourierResponse);
         boolean firstResponseBody= CourierClient.getResponseBodyFieldByPath(firstCreatedCourierResponse, "ok");
         // Create second courier
-        Response secondCourierCreatedResponse = courierClient.createResponse(secondCourier);
+        Response secondCourierCreatedResponse = courierClient.createCourierResponse(secondCourier);
         int secondCourierResponseCode = CourierClient.getResponseCode(secondCourierCreatedResponse);
         String secondResponseBody = CourierClient.getResponseBodyFieldByPath(secondCourierCreatedResponse, "message");
 

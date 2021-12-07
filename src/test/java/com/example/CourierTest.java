@@ -43,20 +43,20 @@ public class CourierTest {
     public void courierCanBeCreatedWithCredentials() {
         courier = Courier.getRandom();
         Response courierCreatedResponse = courierClient.createCourierResponse(courier);
-        int responseCode = CourierClient.getResponseCode(courierCreatedResponse);
-        boolean responseBody = CourierClient.getResponseBodyFieldByPath(courierCreatedResponse, "ok");
+        int responseCode = courierCreatedResponse.getStatusCode();
+        boolean responseOkField = courierCreatedResponse.getBody().path("ok");
         assertThat("Courier not created",
-                true, both(is(responseCode == 201)).and(is(responseBody)));
+                true, both(is(responseCode == 201)).and(is(responseOkField)));
     }
 
     @Test
     public void courierCanBeCreatedWithRequiredFields() {
         courier = Courier.getCourierWithOnlyRequiredFields();
         Response courierCreatedResponse = courierClient.createCourierResponse(courier);
-        int responseCode = CourierClient.getResponseCode(courierCreatedResponse);
-        boolean responseBody = CourierClient.getResponseBodyFieldByPath(courierCreatedResponse, "ok");
+        int responseCode = courierCreatedResponse.getStatusCode();
+        boolean responseOkField = courierCreatedResponse.getBody().path("ok");
         assertThat("Courier not created",
-                true, both(is(responseCode == 201)).and(is(responseBody)));
+                true, both(is(responseCode == 201)).and(is(responseOkField)));
     }
 
     @Test
@@ -64,18 +64,18 @@ public class CourierTest {
         courier = Courier.getRandom();
         // Create first courier
         Response firstCreatedCourierResponse = courierClient.createCourierResponse(courier);
-        int firstCourierResponseCode = CourierClient.getResponseCode(firstCreatedCourierResponse);
-        boolean firstResponseBody= CourierClient.getResponseBodyFieldByPath(firstCreatedCourierResponse, "ok");
+        int firstCourierResponseCode = firstCreatedCourierResponse.getStatusCode();
+        boolean firstResponseOkField= firstCreatedCourierResponse.getBody().path("ok");
         // Create second courier
         Response secondCourierCreatedResponse = courierClient.createCourierResponse(courier);
-        int secondCourierResponseCode = CourierClient.getResponseCode(secondCourierCreatedResponse);
-        String secondResponseBody = CourierClient.getResponseBodyFieldByPath(secondCourierCreatedResponse, "message");
+        int secondCourierResponseCode = secondCourierCreatedResponse.getStatusCode();
+        String secondResponseOkField = secondCourierCreatedResponse.getBody().path("message");
 
         assertThat("First courier wasn't created",
-                true, both(is(firstCourierResponseCode == 201)).and(is(firstResponseBody)));
+                true, both(is(firstCourierResponseCode == 201)).and(is(firstResponseOkField)));
         assertThat("Second courier was created", 409, is(secondCourierResponseCode));
         assertThat("Body message is incorrect when attempting to create second identical Courier",
-                secondResponseBody,
+                secondResponseOkField,
                 containsString("Этот логин уже используется"));
 
     }
@@ -84,8 +84,8 @@ public class CourierTest {
     public void courierCantBeCreatedWithoutCredentials() {
         courier = Courier.getCourierWithEmptyCredentials();
         Response courierResponse = courierClient.createCourierResponse(courier);
-        int responseCode = CourierClient.getResponseCode(courierResponse);
-        String responseBody = CourierClient.getResponseBodyFieldByPath(courierResponse, "message");
+        int responseCode = courierResponse.getStatusCode();
+        String responseBody = courierResponse.getBody().path("message");
         assertThat("Courier without credentials was created", 400, is(responseCode));
         assertThat("Body message is incorrect when attempting to create a courier without credentials",
                 responseBody,
@@ -98,18 +98,18 @@ public class CourierTest {
         Courier secondCourier = Courier.getCourierWithExactLogin(courier.login);
         // Create first courier
         Response firstCreatedCourierResponse = courierClient.createCourierResponse(courier);
-        int firstCourierResponseCode = CourierClient.getResponseCode(firstCreatedCourierResponse);
-        boolean firstResponseBody= CourierClient.getResponseBodyFieldByPath(firstCreatedCourierResponse, "ok");
+        int firstCourierResponseCode = firstCreatedCourierResponse.getStatusCode();
+        boolean firstResponseOkField= firstCreatedCourierResponse.getBody().path("ok");
         // Create second courier
-        Response secondCourierCreatedResponse = courierClient.createCourierResponse(secondCourier);
-        int secondCourierResponseCode = CourierClient.getResponseCode(secondCourierCreatedResponse);
-        String secondResponseBody = CourierClient.getResponseBodyFieldByPath(secondCourierCreatedResponse, "message");
+        Response secondCourierCreatedResponse = courierClient.createCourierResponse(courier);
+        int secondCourierResponseCode = secondCourierCreatedResponse.getStatusCode();
+        String secondResponseOkField = secondCourierCreatedResponse.getBody().path("message");
 
         assertThat("First courier wasn't created",
-                true, both(is(firstCourierResponseCode == 201)).and(is(firstResponseBody)));
+                true, both(is(firstCourierResponseCode == 201)).and(is(firstResponseOkField)));
         assertThat("Second courier was created", 409, is(secondCourierResponseCode));
         assertThat("Body message is incorrect when attempting to create second identical Courier",
-                secondResponseBody,
+                secondResponseOkField,
                 containsString("Этот логин уже используется"));
     }
 }

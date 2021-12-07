@@ -49,14 +49,4 @@ public class RestAssuredClient {
         }
         return returnedResponse;
     }
-
-
-
-    public static int getResponseCode(Response response) {
-        return response.then().extract().statusCode();
-    }
-
-    public static <T> T getResponseBodyFieldByPath(Response response, String fieldPath) {
-        return response.then().extract().path(fieldPath);
-    }
 }

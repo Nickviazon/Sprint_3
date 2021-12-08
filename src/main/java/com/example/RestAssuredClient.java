@@ -2,6 +2,7 @@ package com.example;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -18,7 +19,7 @@ public class RestAssuredClient {
 
     public static Response getResponse(
             RequestSpecification specification,
-            ResponseType responseType,
+            Method requestType,
             String requestPath,
             Object requestBody) {
         RequestSpecification requestSpecification;
@@ -28,7 +29,7 @@ public class RestAssuredClient {
             requestSpecification = given().spec(specification).when();
         }
         Response returnedResponse;
-        switch (responseType) {
+        switch (requestType) {
             case GET:
                 returnedResponse = requestSpecification.get(requestPath);
                 break;
@@ -45,7 +46,7 @@ public class RestAssuredClient {
                 returnedResponse =  requestSpecification.delete(requestPath);
                 break;
             default:
-                throw new IllegalArgumentException("Trying to calls unsupported request type");
+                throw new IllegalArgumentException("Trying to call unsupported request type");
         }
         return returnedResponse;
     }

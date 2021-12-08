@@ -1,5 +1,6 @@
 package com.example;
 
+import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -18,9 +19,9 @@ public class CourierClient extends RestAssuredClient {
 
     public Response createCourierResponse(Courier courier) {
         RequestSpecification specification = getBaseSpec();
-        ResponseType responseType = ResponseType.POST;
+        Method requestType = Method.POST;
         String requestPath = COURIER_PATH;
-        return getResponse(specification, responseType, COURIER_PATH, courier);
+        return getResponse(specification, requestType, COURIER_PATH, courier);
     }
 
     public int loginCourier(CourierCredentials credentials) {
@@ -31,9 +32,9 @@ public class CourierClient extends RestAssuredClient {
 
     public Response loginCourierResponse(CourierCredentials credentials) {
         RequestSpecification specification = getBaseSpec();
-        ResponseType responseType = ResponseType.POST;
+        Method requestType = Method.POST;
         String requestPath = String.format("%s/%s", COURIER_PATH, "login/");
-        return getResponse(specification, responseType, requestPath, credentials);
+        return getResponse(specification, requestType, requestPath, credentials);
     }
 
     public boolean deleteCourier(int courierId) {
@@ -44,24 +45,10 @@ public class CourierClient extends RestAssuredClient {
 
     public Response deleteCourierResponse(int courierId) {
         RequestSpecification specification = getBaseSpec();
-        ResponseType responseType = ResponseType.DELETE;
+        Method requestType = Method.DELETE;
         String requestPath = String.format("%s/%s", COURIER_PATH, courierId);
         Object requestBody = null;
-        return getResponse(specification, responseType, requestPath, requestBody);
+        return getResponse(specification, requestType, requestPath, requestBody);
     }
-    /*public boolean delete(int courierId) {
-        response = given()
-                .spec(getBaseSpec())
-                .when().delete(String.format("%s/%s", COURIER_PATH, courierId));
-        return response.then().assertThat().statusCode(200)
-                .extract().path("ok");
-    }*/
 
-    /*public long getCouriersOrderCount(int courierId) {
-        response = given()
-                .spec(getBaseSpec())
-                .when().get(String.format("%s/%s/%s", COURIER_PATH, courierId, "ordersCount"));
-        return response.then().assertThat().statusCode(200)
-                .extract().path("orderCount");
-    }*/
 }

@@ -16,6 +16,8 @@ public class Courier {
         this.firstName = firstName;
     }
 
+
+
     public static Courier getRandom() {
         HashMap<String, String> randomCouriersFields = generateRandomValues();
         return new Courier(
@@ -35,6 +37,16 @@ public class Courier {
     public static Courier getCourierWithEmptyCredentials() {
         HashMap<String, String> randomCouriersFields = generateRandomValues();
         return new Courier(null, null, randomCouriersFields.get("firstName"));
+    }
+
+    public static Courier getCourierWithoutLogin() {
+        HashMap<String, String> randomCouriersFields = generateRandomValues();
+        return new Courier(null, randomCouriersFields.get("password"), randomCouriersFields.get("firstName"));
+    }
+
+    public static Courier getCourierWithoutPassword() {
+        HashMap<String, String> randomCouriersFields = generateRandomValues();
+        return new Courier(randomCouriersFields.get("login"), null, randomCouriersFields.get("firstName"));
     }
 
     public static Courier getCourierWithExactLogin(String login) {

@@ -27,4 +27,12 @@ public class OrderClient extends RestAssuredClient {
                 .then().assertThat().statusCode(200)
                 .extract().path("ok");
     }
+
+    public static Response getOrderListResponse() {
+        RequestSpecification specification = getBaseSpec();
+        Method requestType = Method.GET;
+        String requestPath = ORDER_PATH;
+        Object requestBody = null;
+        return getResponse(specification, requestType, requestPath, requestBody);
+    }
 }

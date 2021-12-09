@@ -1,6 +1,5 @@
 package com.example;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;

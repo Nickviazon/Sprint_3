@@ -12,8 +12,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(Parameterized.class)
 public class CourierFailLoginTest {
 
-    private Integer courierId;
-
     @Parameterized.Parameter()
     public Courier courier;
 
@@ -34,7 +32,7 @@ public class CourierFailLoginTest {
     }
     
     @Test
-    @DisplayName("Courier can't login ")
+    @DisplayName("Courier can't login")
     public void courierCantLogin() {
         Response loginCourierResponse = CourierClient.loginCourierResponse(CourierCredentials.from(courier));
 

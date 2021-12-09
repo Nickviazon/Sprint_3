@@ -30,8 +30,6 @@ public class CourierCreationSuccessTest {
         };
     }
 
-    private int courierId;
-
     @After
     public void tearDown() {
         CourierClient courierClient = new CourierClient();

@@ -1,22 +1,9 @@
-/*
-    курьера можно создать;  +
-    нельзя создать двух одинаковых курьеров; +
-    чтобы создать курьера, нужно передать в ручку все обязательные поля; +
-    запрос возвращает правильный код ответа; +
-    успешный запрос возвращает ok: true; +
-    если одного из полей нет, запрос возвращает ошибку; +
-    если создать пользователя с логином, который уже есть, возвращается ошибка. +
-*/
-
 package com.example;
 
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

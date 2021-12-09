@@ -16,8 +16,6 @@ public class Courier {
         this.firstName = firstName;
     }
 
-
-
     public static Courier getRandom() {
         HashMap<String, String> randomCouriersFields = generateRandomValues();
         return new Courier(
@@ -56,9 +54,14 @@ public class Courier {
 
     private static HashMap<String, String> generateRandomValues() {
         HashMap<String, String> randomValues = new HashMap<>();
-        randomValues.put("login", RandomStringUtils.randomAlphabetic(10));
-        randomValues.put("password", RandomStringUtils.randomAlphabetic(10));
-        randomValues.put("firstName", RandomStringUtils.randomAlphabetic(10));
+        String[] randomFields = {
+                "login",
+                "password",
+                "firstName"
+        };
+        for (String field: randomFields) {
+            randomValues.put(field, RandomStringUtils.randomAlphabetic(10));
+        }
         return randomValues;
     }
 }

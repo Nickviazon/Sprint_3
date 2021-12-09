@@ -4,9 +4,6 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-
-import static io.restassured.RestAssured.given;
-
 public class CourierClient extends RestAssuredClient {
 
     private static final String COURIER_PATH = "api/v1/courier";
@@ -17,7 +14,7 @@ public class CourierClient extends RestAssuredClient {
                 then().assertThat().statusCode(201).extract().path("ok");
     }
 
-    public Response createCourierResponse(Courier courier) {
+    public static Response createCourierResponse(Courier courier) {
         RequestSpecification specification = getBaseSpec();
         Method requestType = Method.POST;
         String requestPath = COURIER_PATH;
@@ -30,7 +27,7 @@ public class CourierClient extends RestAssuredClient {
                 .extract().path("id");
     }
 
-    public Response loginCourierResponse(CourierCredentials credentials) {
+    public static Response loginCourierResponse(CourierCredentials credentials) {
         RequestSpecification specification = getBaseSpec();
         Method requestType = Method.POST;
         String requestPath = String.format("%s/%s", COURIER_PATH, "login/");
@@ -43,7 +40,7 @@ public class CourierClient extends RestAssuredClient {
                 .extract().path("ok");
     }
 
-    public Response deleteCourierResponse(int courierId) {
+    public static Response deleteCourierResponse(int courierId) {
         RequestSpecification specification = getBaseSpec();
         Method requestType = Method.DELETE;
         String requestPath = String.format("%s/%s", COURIER_PATH, courierId);

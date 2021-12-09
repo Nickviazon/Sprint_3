@@ -12,7 +12,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(Parameterized.class)
 public class CourierFailLoginTest {
 
-    private CourierClient courierClient;
     private Integer courierId;
 
     @Parameterized.Parameter()
@@ -33,18 +32,15 @@ public class CourierFailLoginTest {
                 {Courier.getRandom(), 404, "Учетная запись не найдена"}
         };
     }
-
-    @Before
-    public void setUp() {
-        courierClient = new CourierClient();
-    }
-
+    
     @Test
     public void courierCantLogin() {
-        Response loginCourierResponse = courierClient.loginCourierResponse(CourierCredentials.from(courier));
+        Response loginCourierResponse = CourierClient.loginCourierResponse(CourierCredentials.from(courier));
+
         int actualStatusCode = loginCourierResponse.getStatusCode();
-        String actualErrorMessage = loginCourierResponse.getBody().path("message");
         assertThat("Wrong response code", actualStatusCode, is(expectedStatusCode));
+
+        String actualErrorMessage = loginCourierResponse.getBody().path("message");
         assertThat("Wrong error message in response body", actualErrorMessage, containsString(expectedErrorMessage));
     }
 

@@ -1,5 +1,6 @@
 package com.example;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.Test;
 
@@ -12,6 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class OrderListTest {
 
     @Test
+    @DisplayName("Orders list contains orders")
     public void orderListResponseWith200CodeAndContainsOrders() {
         Response orderListResponse = OrderClient.getOrderListResponse();
 

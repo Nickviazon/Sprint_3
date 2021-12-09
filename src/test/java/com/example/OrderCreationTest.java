@@ -1,5 +1,6 @@
 package com.example;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Test;
@@ -41,6 +42,7 @@ public class OrderCreationTest {
     }
 
     @Test
+    @DisplayName("Check order create")
     public void orderCreatedWith201ResponseAndTrackField() {
         Order order = Order.getRandomOrderWithExactColor(color);
         Response orderCreatedResponse = OrderClient.createOrderResponse(order);

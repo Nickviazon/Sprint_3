@@ -1,6 +1,7 @@
 package com.example;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +24,7 @@ public class CourierSuccessLoginTest {
     @Parameterized.Parameter(1)
     public int expectedResponseCode;
 
-    @Parameterized.Parameters(name="{index}: {0}")
+    @Parameterized.Parameters(name="{index}:{0}")
     public static Object[][] courierData() {
         return new Object[][] {
                 {Courier.getRandom(), 200},
@@ -45,8 +46,9 @@ public class CourierSuccessLoginTest {
     }
 
     @Test
+    @DisplayName("Courier can login ")
     public void courierCanLogin() {
-        Response loginCourierResponse = courierClient.loginCourierResponse(CourierCredentials.from(courier));
+        Response loginCourierResponse = CourierClient.loginCourierResponse(CourierCredentials.from(courier));
         int responseCode = loginCourierResponse.getStatusCode();
         int courierId = loginCourierResponse.getBody().path("id");
         assertThat("Courier don't login", responseCode, is(expectedResponseCode));

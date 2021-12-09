@@ -56,8 +56,6 @@ public class Order {
     }
 
     private static HashMap<String, String> generateRandomStringValues() {
-
-
         HashMap<String, String> randomValues = new HashMap<>();
         String[] randomFields = {
                 "firstName",

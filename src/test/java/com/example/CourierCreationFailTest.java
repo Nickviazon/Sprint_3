@@ -10,6 +10,7 @@
 
 package com.example;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
@@ -36,6 +37,7 @@ public class CourierCreationFailTest {
     }
 
     @Test
+    @DisplayName("Two identical couriers can't be created")
     public void cantBeCreatedTwoIdenticalCouriers() {
         courier = Courier.getRandom();
 
@@ -61,6 +63,7 @@ public class CourierCreationFailTest {
     }
 
     @Test
+    @DisplayName("Courier without credentials can't be created")
     public void courierCantBeCreatedWithoutCredentials() {
         courier = Courier.getCourierWithEmptyCredentials();
         Response courierResponse = CourierClient.createCourierResponse(courier);
@@ -74,6 +77,7 @@ public class CourierCreationFailTest {
     }
 
     @Test
+    @DisplayName("Two couriers with the same login can't be created")
     public void courierCantBeCreatedWithTheSameLogin() {
         // Create first courier
         courier = Courier.getRandom();

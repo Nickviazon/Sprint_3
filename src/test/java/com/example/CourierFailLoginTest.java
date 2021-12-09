@@ -1,5 +1,6 @@
 package com.example;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +23,7 @@ public class CourierFailLoginTest {
     @Parameterized.Parameter(2)
     public String expectedErrorMessage;
 
-    @Parameterized.Parameters()
+    @Parameterized.Parameters(name="{index}:{0}")
     public static Object[][] courierData() {
         return new Object[][] {
                 {Courier.getCourierWithEmptyCredentials(), 400, "Недостаточно данных для входа"}, // логин и пароль == null - бросает 504
@@ -33,6 +34,7 @@ public class CourierFailLoginTest {
     }
     
     @Test
+    @DisplayName("Courier can't login ")
     public void courierCantLogin() {
         Response loginCourierResponse = CourierClient.loginCourierResponse(CourierCredentials.from(courier));
 

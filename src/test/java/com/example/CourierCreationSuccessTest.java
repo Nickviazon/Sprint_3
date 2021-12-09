@@ -1,5 +1,6 @@
 package com.example;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class CourierCreationSuccessTest {
     @Parameterized.Parameter(2)
     public boolean expectedOkField;
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "{index}: {0}")
     public static Object[][] courierData() {
         return new Object[][] {
                 {Courier.getRandom(), 201, true}, // создание курьера со случайными полями
@@ -41,6 +42,7 @@ public class CourierCreationSuccessTest {
     }
 
     @Test
+    @DisplayName("Courier can be created")
     public void courierCanBeCreated() {
         Response courierCreatedResponse = CourierClient.createCourierResponse(courier);
 

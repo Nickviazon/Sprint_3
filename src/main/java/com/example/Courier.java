@@ -10,6 +10,11 @@ public class Courier {
     public final String password;
     public final String firstName;
 
+    @Override
+    public String toString() {
+        return String.format("Courier(login=%s, password=%s, firstName=%s)", login, password, firstName);
+    }
+
     public Courier(String login, String password, String firstName) {
         this.login = login;
         this.password = password;

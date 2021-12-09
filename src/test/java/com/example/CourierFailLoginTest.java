@@ -1,7 +1,6 @@
 package com.example;
 
 import io.restassured.response.Response;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -23,13 +22,13 @@ public class CourierFailLoginTest {
     @Parameterized.Parameter(2)
     public String expectedErrorMessage;
 
-    @Parameterized.Parameters(name="{index}: {0}")
+    @Parameterized.Parameters()
     public static Object[][] courierData() {
         return new Object[][] {
-                {Courier.getCourierWithEmptyCredentials(), 400, "Недостаточно данных для входа"},
-                {Courier.getCourierWithoutLogin(), 400, "Недостаточно данных для входа"},
-                {Courier.getCourierWithoutPassword() ,400, "Недостаточно данных для входа"},
-                {Courier.getRandom(), 404, "Учетная запись не найдена"}
+                {Courier.getCourierWithEmptyCredentials(), 400, "Недостаточно данных для входа"}, // логин и пароль == null - бросает 504
+                {Courier.getCourierWithoutLogin(), 400, "Недостаточно данных для входа"}, // логин == null
+                {Courier.getCourierWithoutPassword() ,400, "Недостаточно данных для входа"}, // пароль == null - бросает 504
+                {Courier.getRandom(), 404, "Учетная запись не найдена"} // неверный логин-пароль - бросает
         };
     }
     

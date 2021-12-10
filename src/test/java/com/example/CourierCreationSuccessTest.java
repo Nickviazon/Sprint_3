@@ -25,8 +25,8 @@ public class CourierCreationSuccessTest {
     @Parameterized.Parameters(name = "{index}: {0}")
     public static Object[][] courierData() {
         return new Object[][] {
-                {Courier.getRandom(), 201, true}, // создание курьера со случайными полями
-                {Courier.getCourierWithOnlyRequiredFields(), 201, true}, // создание курьера с обязательными полями (логин, пароль)
+                {Courier.getRandom(), 201, true}, // СЃРѕР·РґР°РЅРёРµ РєСѓСЂСЊРµСЂР° СЃРѕ СЃР»СѓС‡Р°Р№РЅС‹РјРё РїРѕР»СЏРјРё
+                {Courier.getCourierWithOnlyRequiredFields(), 201, true}, // СЃРѕР·РґР°РЅРёРµ РєСѓСЂСЊРµСЂР° СЃ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹РјРё РїРѕР»СЏРјРё (Р»РѕРіРёРЅ, РїР°СЂРѕР»СЊ)
         };
     }
 

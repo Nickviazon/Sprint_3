@@ -24,10 +24,10 @@ public class CourierFailLoginTest {
     @Parameterized.Parameters(name="{index}:{0}")
     public static Object[][] courierData() {
         return new Object[][] {
-                {Courier.getCourierWithEmptyCredentials(), 400, "Недостаточно данных для входа"}, // логин и пароль == null - бросает 504
-                {Courier.getCourierWithoutLogin(), 400, "Недостаточно данных для входа"}, // логин == null
-                {Courier.getCourierWithoutPassword() ,400, "Недостаточно данных для входа"}, // пароль == null - бросает 504
-                {Courier.getRandom(), 404, "Учетная запись не найдена"} // неверный логин-пароль - бросает
+                {Courier.getCourierWithEmptyCredentials(), 400, "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґР°РЅРЅС‹С… РґР»СЏ РІС…РѕРґР°"}, // Р»РѕРіРёРЅ Рё РїР°СЂРѕР»СЊ == null - Р±СЂРѕСЃР°РµС‚ 504
+                {Courier.getCourierWithoutLogin(), 400, "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґР°РЅРЅС‹С… РґР»СЏ РІС…РѕРґР°"}, // Р»РѕРіРёРЅ == null
+                {Courier.getCourierWithoutPassword() ,400, "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґР°РЅРЅС‹С… РґР»СЏ РІС…РѕРґР°"}, // РїР°СЂРѕР»СЊ == null - Р±СЂРѕСЃР°РµС‚ 504
+                {Courier.getRandom(), 404, "РЈС‡РµС‚РЅР°СЏ Р·Р°РїРёСЃСЊ РЅРµ РЅР°Р№РґРµРЅР°"} // РЅРµРІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ-РїР°СЂРѕР»СЊ - Р±СЂРѕСЃР°РµС‚
         };
     }
     

@@ -45,7 +45,7 @@ public class CourierCreationFailTest {
         String secondResponseOkField = secondCourierCreatedResponse.getBody().path("message");
         assertThat("Body message is incorrect",
                 secondResponseOkField,
-                containsString("Этот логин уже используется"));
+                containsString("Р­С‚РѕС‚ Р»РѕРіРёРЅ СѓР¶Рµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ"));
 
     }
 
@@ -60,7 +60,7 @@ public class CourierCreationFailTest {
         String responseBody = courierResponse.getBody().path("message");
         assertThat("Body message is incorrect when attempting to create a courier without credentials",
                 responseBody,
-                containsString("Недостаточно данных для создания учетной записи"));
+                containsString("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґР°РЅРЅС‹С… РґР»СЏ СЃРѕР·РґР°РЅРёСЏ СѓС‡РµС‚РЅРѕР№ Р·Р°РїРёСЃРё"));
     }
 
     @Test
@@ -86,7 +86,7 @@ public class CourierCreationFailTest {
         String secondResponseOkField = secondCourierCreatedResponse.getBody().path("message");
         assertThat("Body message is incorrect",
                 secondResponseOkField,
-                containsString("Этот логин уже используется"));
+                containsString("Р­С‚РѕС‚ Р»РѕРіРёРЅ СѓР¶Рµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ"));
 
     }
 }
